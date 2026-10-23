@@ -2,7 +2,7 @@
 
 ## Finalized skills — 1.2.0
 
-**[Download the complete skill ZIP](../../raw/refs/heads/main/remotion-video-studio-final.zip)**
+**[Download the complete skill ZIP](https://github.com/soomro211/remotion/raw/refs/heads/main/remotion-video-studio-final.zip)**
 · [SHA-256 checksum](remotion-video-studio-final.zip.sha256)
 
 One archive containing all 16 skills, **Cut Paper as the only theme**, fonts and

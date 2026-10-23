@@ -1,6 +1,6 @@
 # Remotion Video Studio
 
-## Finalized skills — 1.2.0
+## Finalized skills — 1.2.1
 
 **[Download the complete skill ZIP](https://github.com/soomro211/remotion/raw/refs/heads/main/remotion-video-studio-final.zip)**
 · [SHA-256 checksum](remotion-video-studio-final.zip.sha256)
@@ -8,11 +8,12 @@
 One archive containing all 16 skills, **Cut Paper as the only theme**, fonts and
 notices, theme previews, approved production references, helper scripts and checks.
 The former map theme, its datasets, dedicated helper and unused fonts are removed
-from this release. Older split ZIP uploads are historical; use the finalized ZIP.
+from this release. Use the finalized ZIP; no second archive is needed.
 
 The workflow defaults to topic-specific paper worlds, smooth subject animation,
 purposeful camera movement and transitions, accurate smooth subtitles above
-bottom controls, brief optional opening titles and no persistent chapter headings,
+bottom controls (default y=1500 at 1080×1920, leaving 272px below the plate),
+brief optional opening titles and no persistent chapter headings,
 progress bars or scene counters. It includes concrete camera/continuity patterns
 from the approved Industrial Revolution film and an evidence-based QA checklist.
 
@@ -40,8 +41,3 @@ The finalized package passed eight regression tests, TypeScript/browser smoke
 checks, local-link and asset checks, and clean-extraction/manifest validation.
 Detailed evidence and limitations are in its `VALIDATION.md`. Good instructions
 support better work; each new film still requires visual judgment and render review.
-
-## Production reference
-
-[Industrial Revolution video](videos/industrial-revolution.mp4)
-· [Subtitles](videos/industrial-revolution.srt)

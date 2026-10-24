@@ -2,7 +2,7 @@
 
 [Download the workflow ZIP](remotion-video-studio-final.zip) · [SHA-256](remotion-video-studio-final.zip.sha256)
 
-This release: 231,602 bytes, 139 files, 12 skills — previously 973,214 bytes, 184 files, 16 skills. Every skill, reference, theme, font and dataset the 3.0.0 routing did not reach is gone; the retained workflow is unchanged. See the [complete audit](AUDIT-3.0.0.md).
+This release: 231,615 bytes, 139 files, 12 skills — previously 973,214 bytes, 184 files, 16 skills. Every skill, reference, theme, font and dataset the 3.0.0 routing did not reach is gone; the retained workflow is unchanged. See the [complete audit](AUDIT-3.0.0.md) and the [step-by-step workflow](WORKFLOW-3.1.0.md).
 
 The current brief drives creative decisions. User requirements retain their source and scope; technical checks are separate from artistic judgment. Palette, type, setting, cast, narrator, visual method, shot structure, captions and sound are project decisions.
 

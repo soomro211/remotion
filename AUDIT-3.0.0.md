@@ -693,6 +693,10 @@ python3 -m unittest discover -s tests → Ran 24 tests, 3 errors, 1 skipped
 
 The three errors and the skipped class are the ffmpeg/numpy/scipy dependency noted in §6.3, unchanged from the pre-edit baseline (identical 24/3/1 result). `package_release.py` regenerated `MANIFEST.json` and the ZIP, which was re-extracted and re-validated before delivery.
 
+### Follow-up consistency pass (same release)
+
+Reading the workflow end-to-end surfaced four sentences that contradicted 3.1.0; all fixed before packaging: `current-workflow.md` still said "sixteen supplied skills" and "optional font resources"; `delivery-workflow.md` still described the deleted legacy estimator; `remotion-upgrade/SKILL.md` still listed the removed `remotion-saas` in `npx skills update`; `THIRD_PARTY.md` still said licensed font files ship. `WORKFLOW-3.1.0.md` added at the repository root and `tools/audit_references.py` documented in the verification block.
+
 ### Deliberately not done
 
 - `asset_catalog_entries` / `story_asset_packages` stay in `RELEASE.json` and `validate_bundle.py`: with the theme inventory gone, they are now the only guard that no reusable visual library re-enters.

@@ -641,3 +641,60 @@ Worth stating explicitly, because a size-driven cleanup could easily destroy the
 | `tools/check_fresh_project.py` | 5,481 | 2 | **KEEP** |  |
 | `tools/package_release.py` | 1,959 | 1 | **KEEP** |  |
 | `tools/validate_bundle.py` | 7,074 | 2 | **KEEP+** | Asserts zero `asset_catalog_entries`/`story_asset_packages`, i.e. it enforces absence of deleted v2 features. |
+
+---
+
+## 11. Applied — release 3.1.0
+
+Every recommendation in §3–§5 was executed on request, including removal of the four skills. Result: **184 → 139 files**, **2,001,900 → 500,496 bytes raw**, **973,214 → 231,602 bytes zipped (−76 %)**, **16 → 12 skills**, **99 → 75 Markdown files**. New SHA-256 `86f1681e1499ad643243c9176a50fc178ea73859c802311562080a51955020c1`.
+
+### Removed
+
+| Path | Bytes | Why |
+|---|---:|---|
+| `PLAN.md` | 1,714 | v1.5.0 plan contradicting the 3.0.0 asset policy (§2.1) |
+| `skills/video-scriptwriting/` (SKILL + 5 refs + agent) | 7,461 | superseded by `video-director`; speech guidance folded into its `SKILL.md` |
+| `skills/remotion-preproduction/` (SKILL + 6 refs + agent) | 7,968 | superseded planning layer; 5 of 6 refs were duplicates (§2.5) |
+| `skills/remotion-themes/` (SKILL + THEME + 3 fonts + 3 notices) | 1,067,969 | art direction lives in `current-workflow.md`; fonts were named nowhere (§5.1) |
+| `skills/remotion-sound-design/` (SKILL + 5 refs + 2 assets + agent + `synth_sfx.py`; the other two scripts moved) | 28,740 | sound treatment lives in `delivery-workflow.md`; 5 refs were unrouted, `synth_sfx.py`/`SfxTrack.tsx`/`example-cues.json` unused |
+| `skills/remotion-markup/light-leaks.md` | 3,279 | `lightLeak()` already catalogued in `effects.md` (§3.1) |
+| `skills/remotion-markup/assets/useProjectFonts.ts` | 623 | referenced only by the test harness; `local-fonts.md` teaches `@remotion/fonts` (§3.3) |
+| `skills/video-director/scripts/legacy_pause_estimator.py` | 6,451 | schema-3 forbids inferring cuts from pauses (§2.3) |
+| `skills/video-director/scripts/doctor.py` | 2,711 | referenced by nothing anywhere (§3.3) |
+| `skills/remotion-maps/techniques/maptiler/assets/sample-data/` | 346,216 | generated geography with unstated provenance (§6.4) |
+| `…/maptiler/assets/RiverReveal.tsx`, `example-Root.tsx` | 11,869 | hard-imported the deleted sample data |
+| `…/{mapbox,maplibre,maptiler}/references/render-stability.md` ×3 → 1 shared | −7,558 | byte-identical copies (§4.1) |
+
+### Preserved, not deleted — and why
+
+`audit_audio.py` (4,232 B) and `mix_preview.py` (4,654 B) moved from the removed sound skill into `skills/video-director/scripts/`, because the retained pipeline calls them: `finalize.py` loudness-normalizes and audits through `audit_audio.py`, and `auto_sfx.py` builds the preview mix and `sfxCues.ts` through `mix_preview.py`. Deleting the skill without this move would have broken `finalize.py` and five tests. Callers and `tests/test_pipeline.py` were updated; the delivery guidance now states that both scripts ship beside the director's own.
+
+### Code and doc changes
+
+- `after_vo.py`: legacy branch deleted, `--tail`/`--music` dropped, a non-schema-3 plan now exits with a clear message instead of being re-estimated (and no longer auto-emits sound).
+- `init_video.py`: undocumented `--no-sfx` removed.
+- `video-director/SKILL.md`: speech/audience/opening/causal-clarity guidance folded in where the two removed links were; version 3.1.0.
+- `remotion-markup/SKILL.md`: Cut Paper/font sentence replaced with "no family is bundled".
+- `delivery-workflow.md`: names `mix_preview.py` / `audit_audio.py` and states no sound library ships.
+- `remotion-maps`: one shared `references/render-stability.md`; maptiler docs now describe `prep-geo.mjs` generation instead of deleted demo components; `MapTilerVectorElement.ts` comment fixed.
+- `tools/validate_bundle.py`: 12 expected skills, theme/font assertions removed, a guard added so a `themes`/`reusable-assets`/`catalog` folder cannot re-enter, `themes: []` enforced.
+- `tools/audit_references.py`: **the tautological routing check is replaced by a real link-graph walk plus filename-mention fallback** — the exact defect from §6.1. The obsolete-token list now also rejects every removed name.
+- `tools/check_fresh_project.py`: bundled font removed from the fixture (the compile test's purpose, the missing-caption-style rejection, is unchanged); `public/fonts` assertion dropped.
+- `CHANGELOG.md`: 3.1.0 entry added above 1.2.1 (§2.2 fixed). `README.md`, `VALIDATION.md`, `THIRD_PARTY.md`, `RELEASE.json` (3.1.0, `skill_count: 12`, `themes: []`) updated; `FRESH-PROJECT-CHECK.json` and `TREATMENT-EVALUATION.json` keep their 3.0.0 version fields because they record that run. Font/dataset claims in `THIRD_PARTY.md` are now true rather than aspirational (§3.3, §6.4).
+- All `studio-reference:3.0.0` markers and the decision-architecture header moved to 3.1.0.
+
+### Verification after the change
+
+```
+python3 tools/validate_bundle.py   → PASS: 12 skills; 139 files; links, JSON, Python syntax, artwork policy and manifest
+python3 tools/audit_references.py  → PASS: 75 Markdown files; reachability and obsolete-reference checks
+python3 -m unittest discover -s tests → Ran 24 tests, 3 errors, 1 skipped
+```
+
+The three errors and the skipped class are the ffmpeg/numpy/scipy dependency noted in §6.3, unchanged from the pre-edit baseline (identical 24/3/1 result). `package_release.py` regenerated `MANIFEST.json` and the ZIP, which was re-extracted and re-validated before delivery.
+
+### Deliberately not done
+
+- `asset_catalog_entries` / `story_asset_packages` stay in `RELEASE.json` and `validate_bundle.py`: with the theme inventory gone, they are now the only guard that no reusable visual library re-enters.
+- `channel.json` keeps its `cut-paper` medium preference: it records a user request, not a bundled theme.
+- The optional upstream skills (`maps`, `multimedia`, `docs`, `upgrade`, `transcribe`/SRT/`display-captions` paths, `voiceover.md`) remain — removing third-party licensed material is a product decision, not hygiene.

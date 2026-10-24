@@ -1,47 +1,24 @@
-# Remotion Video Studio — 1.6.0
+# Remotion Video Studio — 3.0.0
 
-**[Download the finalized skill ZIP](https://github.com/soomro211/remotion/raw/refs/heads/main/remotion-video-studio-final.zip)** · [SHA-256](remotion-video-studio-final.zip.sha256)
+[Download the workflow ZIP](remotion-video-studio-final.zip) · [SHA-256](remotion-video-studio-final.zip.sha256)
 
-16 skills, Cut Paper as the sole theme, **171 editable asset/tool entries** with searchable PNG/SVG
-previews, local fonts, eight silent studies and source/render checks.
+The current brief drives creative decisions. User requirements retain their source and scope; technical checks are separate from artistic judgment. Palette, type, setting, cast, narrator, visual method, shot structure, captions and sound are project decisions.
 
-This release adds **65 entries**: 13 buildings, 12 locations, 10 road/floor surfaces, 16 equipment
-and everyday props, four human interactions, a complete pouring scene, six effects and three
-movement/transition tools. It repairs gestures, wrist orientation, pouring, the bed, airplane and
-basic shop/school/hospital façades. New locations include city, industry, interiors, harbor, coast,
-desert, canyon and winter. Appearances are controls, not inflated counts.
+## Architecture
+Understand purpose/audience/scope → write speech and visual shots independently → develop contextual art direction → prepare/review project artwork → align speech and assemble → review creativity and engineering separately → deliver.
 
-Lift/place/push/pull share hand/object contacts. Pouring follows the moving spout, keeps a level
-source surface, delays received volume and respects the receiver rim. Effects have deterministic,
-finite lifetimes. Walking retains planted feet and wheels follow distance.
+Colors follow setting, materials, lighting, context, tone and readable hierarchy. References have explicit roles and limits. A material reference does not automatically become a palette. The starter injects no creative treatment, aspect ratio, duration, scenery, font or sound. Caption styling and sound events are supplied explicitly by the project.
 
-## Install or update
+Original artwork stays inside its project. The shared skills contain methods, optional licensed fonts and technical tools. Feedback first corrects the affected project; broader workflow changes need suitable evidence and scope.
 
-1. Extract the ZIP; back up customized installed skills.
-2. Merge saved installed story packages into the extracted library with `asset_workflow.py sync`
-   before replacement. The included asset-first guide gives exact commands.
-3. Copy `remotion-video-studio/skills/` into Codex `~/.codex/skills/`, project `.agents/skills/`,
-   or Claude Code `~/.claude/skills/`. Keep sibling folders and the merged archive together.
+## Installation
+Extract the ZIP, back up customizations and replace the old studio-owned folders in `~/.codex/skills/`, `.agents/skills/`, or `~/.claude/skills/`. Keep unrelated skills and completed films. All 16 resources are available, with specialist/API guidance loaded as needed.
 
-## Use
+Use video-director with the current topic, audience and purpose. The optional `channel` profile carries this user's sourced preferences for paper construction, lower smooth subtitles, purposeful display text and opening attention. It is selected explicitly and contains no palette, font, cast, location or story template.
 
-> Use video-director. Make a video about [topic] in the cut-paper theme.
+Schema 3 separates `narration` from `shots`. Voice registration preserves the take without choosing shot cuts. Older project sources/exports remain intact; their legacy estimator is explicitly named. Existing authorization carries forward through the requested outcome.
 
-The workflow plans a human script/storyboard, then creates/reviews distinctive editable art and
-saves it in the **main skill set's assets/library/** before scene assembly. Topic-specific art stays
-there too. Existing authorization carries forward; standalone assets need no narration. Future
-agents can restore source without the original videos, and updates preserve saved additions.
+## Verification
+34 regressions passed. A relocated project compiled and rendered with explicit caption styling. Three controlled contextual treatment studies compiled, rendered, fully decoded, ran at 1x in a browser and passed schema-3 finalization. Image observations and technical outcomes are recorded separately. All 99 skill Markdown references pass routing/obsolete-reference checks.
 
-Defaults include smooth subject action, motivated camera/transitions, varied settings, original
-voice preservation, actual-audio caption timing and lower subtitles. At 1080×1920 the caption plate
-uses x80/y1500/w890/h148. No persistent chapter headings, counters, progress UI or forced outro.
-
-```bash
-python3 skills/remotion-themes/scripts/assets.py list --search factory
-python3 skills/remotion-themes/scripts/assets.py copy /path/to/video --assets factory,industrial-yard,forklift,lift,pouring,steam,camera,captions
-python3 skills/remotion-themes/scripts/asset_workflow.py search --query river
-```
-
-The ZIP includes `VALIDATION.md`, current source-generated references and a clean-project rendering
-check. Passing technical checks does not guarantee a future film's artistic quality or facts; each
-film still requires actual review. Private films, voice takes, credentials and caches are excluded.
+The package includes detailed validation scope, requirements, source notices and integrity records. Technical tests and controlled studies are not a guarantee of future creative quality. Each real film requires its own review.
